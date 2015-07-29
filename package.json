@@ -1,0 +1,18 @@
+{
+	"name": "Tomato-Bot",
+	"version": "0.1.3",
+	"description": "An bot for Groupme.",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Harry Ho",
+	"license": "BSD",
+	"dependencies": {
+		"fancy-groupme-bot": "^0.1.2",
+		"async": "^0.9.0",
+		"underscore": "^1.5.2",
+		"natural": "^0.1.21",
+		"request": "^2.27.0"
+	}
+}
