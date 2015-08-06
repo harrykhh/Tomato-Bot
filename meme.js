@@ -246,7 +246,7 @@ function generate(url, text1, text2, callback) {
     				callback(null, results[0]);
     			});
         } else {
-          callback (null, 'Unexpected response: ' + code, json);
+          callback (null, 'Unexpected response: ' + code + ' URL: http://memecaptain.com/gend_images/' + sourceImageId);
         }
       });
   	} catch (err) {
@@ -272,7 +272,7 @@ function pollForResult(pollUrl, attempt, callback) {
         case 303:
           return callback(null, response.headers.location);
         default:
-          apiError('Unexpected response: ' + response.statusCode, pollUrl, response.body);
+          console.log('Unexpected response: ' + response.statusCode, pollUrl);
           return callback(null, null);
         }
     });
