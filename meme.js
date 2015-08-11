@@ -211,6 +211,8 @@ function generate(url, text1, text2, callback) {
   text1 = (text1 || '').trim();
 	text2 = (text2 || '').trim();
 	try {
+    if (!sourceImageId)
+      return callback (null, '');
     var resp = request.post({
       url: 'http://memecaptain.com/gend_images',
       json: true,
@@ -246,7 +248,11 @@ function generate(url, text1, text2, callback) {
     				callback(null, results[0]);
     			});
         } else {
-          callback (null, 'Unexpected response: ' + code + ' URL: http://memecaptain.com/gend_images/' + sourceImageId);
+          //callback (null, 'Unexpected response: ' + code + ' URL: http://memecaptain.com/gend_images/' + sourceImageId);
+          console.log('sourceImageId: ' +sourceImageId);
+          console.log('text1: ' +text1);
+          console.log('text2: ' +text2);
+          callback (null, '');
         }
       });
   	} catch (err) {
