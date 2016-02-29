@@ -35,7 +35,8 @@ heroku config:set GROUPMETOKEN=[the groupme token you got when you registered an
 heroku config:set URL=[the url that heroku created for your app]
 heroku config:set AVATAR=[the avatart image url for the new bot]
 heroku config:set BIBLETOKEN=[Bible Token] fron [bibles.org](http://bibles.org)]
-heroku config:set YOUTUBE_API_KEY=[YouTube api key] from [Google](http://console.developers.google.com)
+heroku config:set GOOGLE_API_KEY=[Google api key] from [Google](http://console.developers.google.com) Free limit to 100/day
+heroku config:set GOOGLE_CSE_ID=[Google CSE api key] from [Google](https://cse.google.com/cse/all) Free limit to 100/day
 
 ```
 

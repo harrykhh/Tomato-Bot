@@ -5,7 +5,8 @@ const URL = process.env['URL'];
 const AVATAR = process.env['AVATAR'];
 const BOTNAME = process.env['BOTNAME'];
 const BIBLETOKEN = process.env['BIBLETOKEN'];
-const YOUTUBE_API_KEY = process.env['YOUTUBE_API_KEY'];
+const GOOGLE_API_KEY = process.env['GOOGLE_API_KEY'];
+const GOOGLE_CSE_ID = process.env['GOOGLE_CSE_ID'];
 
 const async = require("async");
 const natural = require('natural');
@@ -115,7 +116,7 @@ bot.on('botMessage', function(bot, message) {
 			request.get({
 					url: "https://www.googleapis.com/youtube/v3/search",
 	      	qs: {
-						key: YOUTUBE_API_KEY,
+						key: GOOGLE_API_KEY,
 		        part: 'id',
 		        type: 'video',
 		        maxResults: 10,
@@ -144,20 +145,22 @@ bot.on('botMessage', function(bot, message) {
 			var query = tokens[2];
 			console.log("searching for " + query);
 			request.get({
-						url: "http://ajax.googleapis.com/ajax/services/search/images",
+						url: "https://www.googleapis.com/customsearch/v1",
 		      	qs: {
-							v: '1.0',
-			        safe: 'active',
-			        imgtype: 'animated',
-			        rsz: 8,
-			        q: query
+							key: GOOGLE_API_KEY,
+							cx: GOOGLE_CSE_ID,
+			        searchType: 'image',
+			        q: query,
+							fileType: 'gif',
+							hq: 'animated',
+							tbs: 'itp:animated';
 		      	}
 		    	}, function (error, response, body) {
 							if (error) console.error(error);
 							var info = JSON.parse(body);
-							if (info.responseData.results.length) {
-								response = _.shuffle(info.responseData.results);
-								var imageUrl = response[0].url;
+							if (info.items.length) {
+								response = _.shuffle(info.items);
+								var imageUrl = response[0].link;
 								console.log("sending a message " + imageUrl);
 								bot.message(imageUrl);
 							}else
@@ -218,27 +221,26 @@ bot.on('botMessage', function(bot, message) {
 			var query = tokens[2];
 			console.log("searching for " + query);
 			request.get({
-							url: "http://ajax.googleapis.com/ajax/services/search/images",
-			      	qs: {
-								v: '1.0',
-				        safe: 'active',
-				        rsz: 8,
-				        q: query
-			      	}
-			    	} , function (error, response, body) {
+						url: "https://www.googleapis.com/customsearch/v1",
+		      	qs: {
+							key: GOOGLE_API_KEY,
+							cx: GOOGLE_CSE_ID,
+			        searchType: 'image',
+			        q: query;
+		      	}
+		    	}, function (error, response, body) {
 							if (error) console.error(error);
 							var info = JSON.parse(body);
-							if (info.responseData.results.length) {
-								response = _.shuffle(info.responseData.results);
-								var imageUrl = response[0].url;
+							if (info.items.length) {
+								response = _.shuffle(info.items);
+								var imageUrl = response[0].link;
 								console.log("sending a message " + imageUrl);
 								bot.message(imageUrl);
 							}else
 							{
 								bot.message('Sorry, no results are found from Google.');
 							}
-			});
-		}
+			});}
 		if (message.text.toLowerCase().indexOf('i\'ll allow it') >= 0) {
 			var imageUrl = "http://i.imgur.com/YcUg2Fr.gif";
 			console.log('sending a message ' + imageUrl);
