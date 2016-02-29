@@ -226,7 +226,7 @@ bot.on('botMessage', function(bot, message) {
 							key: GOOGLE_API_KEY,
 							cx: GOOGLE_CSE_ID,
 			        searchType: 'image',
-			        q: query;
+			        q: query
 		      	}
 		    	}, function (error, response, body) {
 							if (error) console.error(error);
