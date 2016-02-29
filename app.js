@@ -153,7 +153,7 @@ bot.on('botMessage', function(bot, message) {
 			        q: query,
 							fileType: 'gif',
 							hq: 'animated',
-							tbs: 'itp:animated';
+							tbs: 'itp:animated'
 		      	}
 		    	}, function (error, response, body) {
 							if (error) console.error(error);
